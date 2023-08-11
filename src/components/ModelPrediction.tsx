@@ -27,7 +27,7 @@ export default function ModelPrediction(props: ModelPredictionProps) {
       if (!data.label) {
         if (props.btnText === "Analyse Text") {
           const response = await Axios.post(
-            "http://127.0.0.1:8000/api/v1/sentiment-analysis",
+            "http://127.0.0.1:49990/api/v1/sentiment-analysis",
             {
               text: data.text,
             }
