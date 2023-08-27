@@ -1,37 +1,29 @@
 import { lazy, Suspense } from "react";
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
-import AllModels from "./components/AllModels";
 import ModelsFallback from "./components/ModelsFallback";
 const SAModel = lazy(() => import("./components/SAModel"));
-const SAFeedbackModel = lazy(() => import("./components/SAFeedbackModel"));
 const KEModel = lazy(() => import("./components/KEModel"));
-const KEFeedbackModel = lazy(() => import("./components/KEFeedbackModel"));
+const DTModel = lazy(() => import("./components/DTModel"));
 import "./App.css";
 
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<AllModels />} />
+        <Route path="/" element={<Navigate to="/sentiment-analysis" />} />
         <Route
+          index
           path="sentiment-analysis"
           element={
             <Suspense fallback={<ModelsFallback />}>
               <SAModel />
-            </Suspense>
-          }
-        />
-        <Route
-          path="sentiment-analysis-feedback"
-          element={
-            <Suspense fallback={<ModelsFallback />}>
-              <SAFeedbackModel />
             </Suspense>
           }
         />
@@ -44,10 +36,10 @@ export default function App() {
           }
         />
         <Route
-          path="keyword-extraction-feedback"
+          path="data-tagging"
           element={
             <Suspense fallback={<ModelsFallback />}>
-              <KEFeedbackModel />
+              <DTModel />
             </Suspense>
           }
         />
